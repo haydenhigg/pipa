@@ -11,7 +11,7 @@ export default function App() {
         <>
           <Title>Solid App</Title>
           <Header />
-          <Loading fallback={<main class="px-4 py-12 text-zinc-300">Loading…</main>}>
+          <Loading fallback={<main class="px-12 py-12 text-zinc-300">Loading…</main>}>
             {props.children}
           </Loading>
         </>
