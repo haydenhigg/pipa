@@ -1,3 +1,6 @@
 [
-	{"id": 1, "name": "Steppe Project", "tasks": []}
+	{"id": 1, "name": "Steppe Project", "tasks": [
+		"Do the first thing",
+		"Then do the second thing"
+	]}
 ]

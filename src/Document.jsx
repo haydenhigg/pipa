@@ -13,10 +13,10 @@ export default function Document(props) {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <title>Solid App</title>
+        <title>pipa</title>
         <HydrationScript />
       </head>
-      <body class="min-h-screen bg-zinc-950 text-center font-sans text-zinc-100 antialiased">
+      <body class="min-h-screen bg-zinc-950 font-sans text-zinc-100 antialiased">
         {props.children}
       </body>
     </html>
