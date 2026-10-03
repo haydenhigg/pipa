@@ -1,20 +1,31 @@
-import { Title } from '@solidjs/meta';
-import projects from '../data/projects.json';
-import { paths } from '../router';
-import { For } from 'solid-js';
+import { query } from '@solidjs/router'
+import { createMemo, For } from 'solid-js'
+import { Title } from '@solidjs/meta'
+import { paths } from '../router'
+
+const getProjects = query(async () => {
+	const res = await fetch(`http://localhost:8787/projects`)
+  return await res.json()
+}, 'projects')
+
+export const route = {
+  preload: () => void getProjects(),
+}
 
 export default function Home() {
+	const projects = createMemo(() => getProjects())
+
   return (
-		<main class="px-24 py-12">
+		<main class="px-32 py-4">
 			<Title>Projects</Title>
-			<h1 class="text-2xl font-bold">Projects</h1>
+			<h1 class="mb-2 text-4xl font-semibold">Projects</h1>
 			<section>
-	      <ul class="space-y-2">
-	        <For each={projects}>
+	      <ul>
+	        <For each={projects()}>
 	          {(project) => (
 	            <li>
 	              <a
-	                class="font-semibold text-rose-300 underline decoration-rose-500 decoration-2 underline-offset-4 transition-colors hover:text-rose-100 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-500"
+	                class="font-semibold text-rose-300 hover:text-rose-100 hover:underline decoration-2 decoration-rose-500 transition-colors"
 	                href={paths.projects(Number(project.id))}
 	              >
 	                {project.name}
@@ -25,5 +36,5 @@ export default function Home() {
 	      </ul>
 	    </section>
     </main>
-  );
+  )
 }

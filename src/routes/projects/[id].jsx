@@ -1,44 +1,50 @@
-import { Title } from '@solidjs/meta';
-import { query } from '@solidjs/router';
-import { createMemo, For } from 'solid-js';
-import projects from '../../data/projects.json';
+import { query } from '@solidjs/router'
+import { createMemo, For } from 'solid-js'
+import { Title } from '@solidjs/meta'
 
 const getProject = query(async (id) => {
-  return (
-    projects.find((project) => String(project.id) === id) ?? {
-      name: 'Unknown',
-      tasks: [],
-    }
-  );
-}, 'project');
+	const res = await fetch(`http://localhost:8787/projects/${id}`)
+  return await res.json()
+}, 'project')
 
 export const route = {
   preload: ({ params }) => void getProject(params.id),
-} ;
+}
 
 export default function Project(props) {
-  const project = createMemo(() => getProject(props.params.id));
+  const project = createMemo(() => getProject(props.params.id))
 
   return (
-    <section>
+  	<>
       <Title>{`Project ${props.params.id}`}</Title>
-      <h2 class="my-2 text-2xl font-semibold text-zinc-100">{project().name}</h2>
-			<p class="text-zinc-400">{project().tasks.length} tasks</p>
-			<ul>
-				<For each={project().tasks}>
-					{(task) => (
-						<span>{task.name}</span>
-					)}
-				</For>
-			</ul>
-      {/* <p class="my-4">
-        <a
-          class="font-semibold text-rose-300 underline decoration-rose-500 decoration-2 underline-offset-4 transition-colors hover:text-rose-100 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-500"
-          href={paths.projects(Number(props.params.id) + 1)}
-        >
-          Next project
-        </a>
-      </p>*/}
-    </section>
-  );
+      <h1 class="mb-2 text-4xl font-semibold">{project().name}</h1>
+      <section class="mb-8">
+	      <h2 class="mb-1 text-xs font-extrabold tracking-wider text-zinc-400">VIEWS</h2>
+				<div class="flex flex-wrap gap-2">
+					<For each={project().views}>
+						{(view) => (
+							<span class="px-4 py-2 rounded-full bg-zinc-800 border border-zinc-700">{view.name} {view.is_default ? '(DEFAULT)' : ''}</span>
+						)}
+					</For>
+				</div>
+      </section>
+      <section class="my-8">
+				<h2 class="mb-1 text-xs font-extrabold tracking-wider text-zinc-400">TASKS</h2>
+				<ul>
+					<For each={project().sections}>
+						{(section) => (
+							<div class="w-full rounded border border-zinc-700">
+								{section.name}
+								<For each={section.tasks}>
+									{(task) => (
+										<div class="w-full px-2 py-1 border-b border-zinc-700">{task.content}</div>
+									)}
+								</For>
+							</div>
+						)}
+					</For>
+				</ul>
+      </section>
+    </>
+  )
 }

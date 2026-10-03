@@ -1,7 +1,7 @@
-import tailwindcss from '@tailwindcss/vite';
-import { fileRoutes } from 'filesystem-routing/vite';
-import { defineConfig } from 'vite';
-import solid from '@solidjs/vite-plugin';
+import tailwindcss from '@tailwindcss/vite'
+import { fileRoutes } from 'filesystem-routing/vite'
+import { defineConfig } from 'vite'
+import solid from '@solidjs/vite-plugin'
 
 export default defineConfig({
   plugins: [
@@ -16,4 +16,4 @@ export default defineConfig({
     target: 'esnext',
     assetsInlineLimit: 0,
   },
-});
+})
