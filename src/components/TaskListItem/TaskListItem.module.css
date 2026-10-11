@@ -1,0 +1,3 @@
+div.parent:has(div.child:hover) {
+	border-color: var(--color-zinc-200);
+}

@@ -1,6 +1,6 @@
 import { Router } from './router'
 import { Title } from '@solidjs/meta'
-import Header from './components/Header'
+import Nav from './components/Nav'
 import { Loading } from 'solid-js'
 
 import './App.css'
@@ -11,7 +11,7 @@ export default function App() {
       {(props) => (
         <>
           <Title>Solid App</Title>
-          <Header />
+          <Nav />
           <Loading fallback={<main class="px-32 py-16 text-zinc-300">Loading…</main>}>
             {props.children}
           </Loading>

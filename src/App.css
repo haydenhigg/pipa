@@ -1,7 +1,21 @@
 @import 'tailwindcss';
 
+@theme {
+	--font-sans: "Clarity City", ui-sans-serif, system-ui, sans-serif;
+	--color-theme-50: oklch(97.66% 0.0127 48.59);
+	--color-theme-100: oklch(93.47% 0.0369 50.05);
+	--color-theme-200: oklch(88.52% 0.0675 49.83);
+	--color-theme-300: oklch(80.79% 0.1144 49.84);
+	--color-theme-400: oklch(68.45% 0.1681 47.74);
+	--color-theme-500: oklch(63.65% 0.1532 48.08);
+	--color-theme-600: oklch(57.83% 0.1376 47.95);
+	--color-theme-700: oklch(50.82% 0.1154 48.52);
+	--color-theme-800: oklch(44.35% 0.0962 49.04);
+	--color-theme-900: oklch(39.12% 0.082 48);
+	--color-theme-950: oklch(28.52% 0.0499 48.11);
+}
+
 body {
-	font-family: "Clarity City", sans-serif;
-	background-color: var(--color-zinc-950);
-	color: var(--color-zinc-100);
+	background-color: var(--color-zinc-50);
+	color: var(--color-zinc-900);
 }

@@ -1,6 +1,7 @@
 import { query } from '@solidjs/router'
-import { createMemo, For } from 'solid-js'
+import { createMemo, createSignal, For } from 'solid-js'
 import { Title } from '@solidjs/meta'
+import TaskList from '../../components/TaskList'
 
 const getProject = query(async (id) => {
 	const res = await fetch(`http://localhost:8787/projects/${id}`)
@@ -17,43 +18,33 @@ export default function Project(props) {
   return (
   	<>
       <Title>{`Project ${props.params.id}`}</Title>
-      <h1 class="mb-2 text-4xl font-semibold">{project().name}</h1>
-      <section class="mb-8">
-	      <h2 class="mb-1 text-xs font-extrabold tracking-wider text-zinc-400">VIEWS</h2>
+      <h1 class="my-4 text-4xl font-semibold">{project().name}</h1>
+      <section class="my-4">
 				<div class="flex flex-wrap gap-2">
 					<button
-						class="flex size-10 items-center justify-center rounded-full border border-zinc-700 bg-zinc-800 text-zinc-400"
-						role="img"
-						aria-label="No view"
+						class="flex size-10 items-center justify-center bg-theme-100 text-theme-400 rounded-full border border-theme-200 cursor-pointer"
 					>
 						<svg viewBox="0 0 24 24" class="size-5" aria-hidden="true">
-							<path d="M1 6 23 6" fill="none" stroke="currentColor" stroke-width="2" />
-							<path d="M1 12 23 12" fill="none" stroke="currentColor" stroke-width="2" />
-							<path d="M1 18 23 18" fill="none" stroke="currentColor" stroke-width="2" />
+							<path d="M2 6 22 6" fill="none" stroke="currentColor" stroke-width="4" />
+							<path d="M2 12 22 12" fill="none" stroke="currentColor" stroke-width="4" />
+							<path d="M2 18 22 18" fill="none" stroke="currentColor" stroke-width="4" />
 						</svg>
 					</button>
 					<For each={project().views}>
 						{(view) => (
-							<button class="px-4 py-2 rounded-full bg-zinc-800 border border-zinc-700">{view.name} {view.is_default ? '(DEFAULT)' : ''}</button>
+							<button
+								class="px-4 py-2 font-semibold justify-center bg-zinc-100 text-zinc-400 rounded-full border border-zinc-200 cursor-pointer"
+							>
+								{view.name}
+							</button>
 						)}
 					</For>
 				</div>
       </section>
-      <section class="my-8">
-				<h2 class="mb-1 text-xs font-extrabold tracking-wider text-zinc-400">TASKS</h2>
+      <section class="my-4">
 				<ul>
-					<For each={project().sections}>
-						{(section) => (
-							<div class="w-full rounded border border-zinc-700">
-								{section.name}
-								<For each={section.tasks}>
-									{(task) => (
-										<div class="w-full px-2 py-1 border-b border-zinc-700">{task.content}</div>
-									)}
-								</For>
-							</div>
-						)}
-					</For>
+					<h2 class="mt-4 font-semibold tracking-wider text-zinc-500">Tasks</h2>
+					<TaskList tasks={() => project().tasks} />
 				</ul>
       </section>
     </>

@@ -13,8 +13,8 @@ export default function Document(props) {
         <link href="https://fonts.googleapis.com/css2?family=Clarity+City:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
         <HydrationScript />
       </head>
-      <body class="min-h-screen bg-zinc-950 font-sans antialiased">
-        {props.children}
+			<body class="relative min-h-screen font-sans">
+				{props.children}
       </body>
     </html>
   )
