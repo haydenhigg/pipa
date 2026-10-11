@@ -41,11 +41,9 @@ export default function Project(props) {
 					</For>
 				</div>
       </section>
-      <section class="my-4">
-				<ul>
-					<h2 class="mt-4 font-semibold tracking-wider text-zinc-500">Tasks</h2>
-					<TaskList tasks={() => project().tasks} />
-				</ul>
+			<section class="my-4 select-none">
+				<h2 class="mt-4 font-semibold tracking-tight text-zinc-400">Tasks</h2>
+				<TaskList tasks={() => project().tasks} />
       </section>
     </>
   )
