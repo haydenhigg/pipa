@@ -26,8 +26,7 @@ export default function Home() {
 	            <li>
 	              <a
 	                class="text-2xl font-semibold"
-	                href={paths.projects(Number(project.id))}
-	              >
+	                href={paths.projects(Number(project.id))}>
 	                {project.name}
 	              </a>
 	            </li>

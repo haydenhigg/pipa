@@ -1,3 +1,12 @@
-div.parent:has(div.parent:hover) {
+li > div > div:hover > div.statusToggle {
+	border-color: var(--color-theme-200);
+	outline-color: var(--color-theme-200);
+}
+
+li:hover > div.subtaskList {
+	border-color: var(--color-theme-200);
+}
+
+div.subtaskList:has(li:hover > div.subtaskList) {
 	border-color: var(--color-zinc-200);
 }
